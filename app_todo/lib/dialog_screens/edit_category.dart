@@ -15,14 +15,20 @@ class EditCategory extends StatefulWidget {
 
 class _EditCategoryState extends State<EditCategory> {
   var id;
+  Category _category;
   _EditCategoryState(this.id);
   TextEditingController _nameController = TextEditingController();
   TextEditingController _descriptionController = TextEditingController();
   setData() async {
     print(id.toString());
     var data = await CategoryService().readCategoryById(id);
-    _nameController.text = data[0]['name'];
-    _descriptionController.text = data[0]['description'];
+    _category = Category(
+        name: data[0]['name'],
+        description: data[0]['description'],
+        id: data[0]['id']);
+
+    _nameController.text = _category.name;
+    _descriptionController.text = _category.description;
   }
 
   @override
@@ -42,12 +48,12 @@ class _EditCategoryState extends State<EditCategory> {
         ),
         FlatButton(
           onPressed: () async {
-            // var result = await CategoryService().saveCategory(Category(
-            //     description: _descriptionController.text,
-            //     name: _nameController.text));
-            // print(result.toString());
-            // Navigator.of(context)
-            //     .push(MaterialPageRoute(builder: (context) => HomeScreen()));
+            _category.description = _descriptionController.text;
+            _category.name = _nameController.text;
+            var result = await CategoryService().updateCategory(_category);
+            print(result.toString());
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => HomeScreen()));
           },
           child: Text('Save'),
           color: Colors.blue,

@@ -30,4 +30,10 @@ class Repository {
     var con = await database;
     return await con.query(table, where: 'id=?', whereArgs: [itemId]);
   }
+
+  updateData(table, data) async {
+    var con = await database;
+    return await con
+        .update(table, data, where: 'id=?', whereArgs: [data['id']]);
+  }
 }
