@@ -25,4 +25,9 @@ class Repository {
     var con = await database;
     return await con.query(table);
   }
+
+  readDataById(table, itemId) async {
+    var con = await database;
+    return await con.query(table, where: 'id=?', whereArgs: [itemId]);
+  }
 }

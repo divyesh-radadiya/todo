@@ -1,9 +1,10 @@
 import 'package:app_todo/models/category.dart';
-import 'package:app_todo/screen/categories_form.dart';
+import 'package:app_todo/dialog_screens/categories_form.dart';
+
+import 'package:app_todo/dialog_screens/edit_category.dart';
 import 'package:app_todo/screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:app_todo/service/category_service.dart';
-import 'package:app_todo/models/category.dart';
 
 class CategoriesScreen extends StatefulWidget {
   @override
@@ -15,8 +16,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   getData() async {
     var allData = await CategoryService().readCategory();
     for (var data in allData) {
-      _allCategories
-          .add(Category(name: data['name'], description: data['description']));
+      _allCategories.add(Category(
+          name: data['name'],
+          description: data['description'],
+          id: data['id']));
     }
     setState(() {});
   }
@@ -51,7 +54,13 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                     child: ListTile(
                       leading: IconButton(
                         icon: Icon(Icons.edit),
-                        onPressed: () {},
+                        onPressed: () {
+                          return showDialog(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (BuildContext context) =>
+                                  EditCategory(id: _allCategories[index].id));
+                        },
                       ),
                       title: Text(_allCategories[index].name),
                       subtitle: Text(_allCategories[index].description),

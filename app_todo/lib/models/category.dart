@@ -2,7 +2,7 @@ class Category {
   int id;
   String name;
   String description;
-  Category({this.description, this.name});
+  Category({this.description, this.name, this.id});
 
   categoryMap() {
     var mapping = Map<String, dynamic>();
