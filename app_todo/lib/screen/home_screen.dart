@@ -1,5 +1,6 @@
 import 'package:app_todo/screen/my_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:app_todo/screen/add_todo_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -15,6 +16,13 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       drawer: MyDrawer(),
       body: Container(),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => AddTodoScreen()));
+        },
+      ),
     );
   }
 }
