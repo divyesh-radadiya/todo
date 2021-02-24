@@ -1,3 +1,4 @@
+import 'package:app_todo/screen/my_drawer.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -12,6 +13,8 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text('TodoList'),
       ),
+      drawer: MyDrawer(),
+      body: Container(),
     );
   }
 }
