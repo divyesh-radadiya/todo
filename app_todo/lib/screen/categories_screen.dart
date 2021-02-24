@@ -1,6 +1,5 @@
 import 'package:app_todo/models/category.dart';
 import 'package:app_todo/dialog_screens/categories_form.dart';
-
 import 'package:app_todo/dialog_screens/edit_category.dart';
 import 'package:app_todo/screen/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +12,7 @@ class CategoriesScreen extends StatefulWidget {
 
 class _CategoriesScreenState extends State<CategoriesScreen> {
   List<Category> _allCategories = List<Category>();
-  getData() async {
+  _getData() async {
     var allData = await CategoryService().readCategory();
     for (var data in allData) {
       _allCategories.add(Category(
@@ -24,9 +23,31 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     setState(() {});
   }
 
+  _deleteDialog(int index) {
+    return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) => AlertDialog(actions: [
+              FlatButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text('Cancel'),
+                color: Colors.blue,
+              ),
+              FlatButton(
+                onPressed: () {
+                  CategoryService().deleteCategory(_allCategories[index].id);
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => CategoriesScreen()));
+                },
+                child: Text('Delete'),
+                color: Colors.red,
+              )
+            ], title: Text('Are you want to delete ?')));
+  }
+
   @override
   void initState() {
-    getData();
+    _getData();
     super.initState();
   }
 
@@ -72,7 +93,11 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                             Icons.delete,
                             color: Colors.red,
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            setState(() {
+                              _deleteDialog(index);
+                            });
+                          },
                         ),
                       ),
                     ),
