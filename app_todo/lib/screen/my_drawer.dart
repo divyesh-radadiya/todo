@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:app_todo/screen/categories_screen.dart';
+import 'package:app_todo/service/category_service.dart';
+import 'package:app_todo/screen/home_screen.dart';
 
 class MyDrawer extends StatefulWidget {
   @override
@@ -7,6 +9,26 @@ class MyDrawer extends StatefulWidget {
 }
 
 class _MyDrawerState extends State<MyDrawer> {
+  List<Widget> _allCategories = List<Widget>();
+  _getData() async {
+    var allData = await CategoryService().readCategory();
+    for (var data in allData) {
+      _allCategories.add(
+        ListTile(
+          title: Text(data['name']),
+          leading: Icon(Icons.arrow_forward_ios_outlined),
+        ),
+      );
+    }
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    _getData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -19,6 +41,10 @@ class _MyDrawerState extends State<MyDrawer> {
               accountName: Text('Divyesh'),
               accountEmail: Text('divyesh@gmail.com')),
           ListTile(
+            onTap: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => HomeScreen()));
+            },
             title: Text('Home'),
             leading: Icon(Icons.home),
           ),
@@ -29,6 +55,10 @@ class _MyDrawerState extends State<MyDrawer> {
             },
             title: Text('Categories'),
             leading: Icon(Icons.view_list),
+          ),
+          Divider(),
+          Column(
+            children: _allCategories,
           )
         ],
       ),

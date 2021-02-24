@@ -67,42 +67,40 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           ),
           title: Text('TodoList'),
         ),
-        body: Container(
-          child: ListView.builder(
-              itemCount: _allCategories.length,
-              itemBuilder: (context, index) => Padding(
-                    padding: const EdgeInsets.only(
-                        left: 10.0, right: 10.0, top: 8.0),
-                    child: Card(
-                      elevation: 5.0,
-                      child: ListTile(
-                        leading: IconButton(
-                          icon: Icon(Icons.edit),
-                          onPressed: () {
-                            return showDialog(
-                                context: context,
-                                barrierDismissible: false,
-                                builder: (BuildContext context) =>
-                                    EditCategory(id: _allCategories[index].id));
-                          },
+        body: ListView.builder(
+            itemCount: _allCategories.length,
+            itemBuilder: (context, index) => Padding(
+                  padding:
+                      const EdgeInsets.only(left: 10.0, right: 10.0, top: 8.0),
+                  child: Card(
+                    elevation: 5.0,
+                    child: ListTile(
+                      leading: IconButton(
+                        icon: Icon(Icons.edit),
+                        onPressed: () {
+                          return showDialog(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (BuildContext context) =>
+                                  EditCategory(id: _allCategories[index].id));
+                        },
+                      ),
+                      title: Text(_allCategories[index].name),
+                      subtitle: Text(_allCategories[index].description),
+                      trailing: IconButton(
+                        icon: Icon(
+                          Icons.delete,
+                          color: Colors.red,
                         ),
-                        title: Text(_allCategories[index].name),
-                        subtitle: Text(_allCategories[index].description),
-                        trailing: IconButton(
-                          icon: Icon(
-                            Icons.delete,
-                            color: Colors.red,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              _deleteDialog(index);
-                            });
-                          },
-                        ),
+                        onPressed: () {
+                          setState(() {
+                            _deleteDialog(index);
+                          });
+                        },
                       ),
                     ),
-                  )),
-        ),
+                  ),
+                )),
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
           onPressed: () {

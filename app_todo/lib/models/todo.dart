@@ -10,7 +10,8 @@ class Todo {
       this.description,
       this.category,
       this.isFinished,
-      this.todoDate});
+      this.todoDate,
+      this.id});
   todoMap() {
     var mapping = Map<String, dynamic>();
     mapping['id'] = id;

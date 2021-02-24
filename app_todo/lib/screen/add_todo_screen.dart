@@ -3,6 +3,7 @@ import 'package:app_todo/service/category_service.dart';
 import 'package:flutter/material.dart';
 import 'package:app_todo/models/todo.dart';
 import 'package:app_todo/service/todo_service.dart';
+import 'package:app_todo/screen/home_screen.dart';
 
 class AddTodoScreen extends StatefulWidget {
   @override
@@ -99,13 +100,14 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
                 ),
                 child: MaterialButton(
                   onPressed: () async {
-                    var result = await TodoService().saveCategory(Todo(
+                    await TodoService().saveTodo(Todo(
                         title: _todoTitleController.text,
                         description: _todoDescriptionController.text,
                         category: _selectedValue.toString(),
                         isFinished: 0,
                         todoDate: _todoDateController.text));
-                    print(result);
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => HomeScreen()));
                   },
                   child: Text(
                     'Add',

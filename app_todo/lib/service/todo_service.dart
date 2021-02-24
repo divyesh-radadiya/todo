@@ -9,7 +9,11 @@ class TodoService {
     _repository = Repository();
   }
 
-  saveCategory(Todo todo) async {
-    return await _repository.insertData("categories", todo.todoMap());
+  saveTodo(Todo todo) async {
+    return await _repository.insertData("todos", todo.todoMap());
+  }
+
+  readTodo() async {
+    return await _repository.readData('todos');
   }
 }
