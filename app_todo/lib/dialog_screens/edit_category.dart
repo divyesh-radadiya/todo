@@ -1,5 +1,5 @@
 import 'package:app_todo/models/category.dart';
-import 'package:app_todo/screen/home_screen.dart';
+import 'package:app_todo/screen/categories_screen.dart';
 import 'package:app_todo/service/category_service.dart';
 
 import 'package:flutter/material.dart';
@@ -52,8 +52,8 @@ class _EditCategoryState extends State<EditCategory> {
             _category.name = _nameController.text;
             var result = await CategoryService().updateCategory(_category);
             print(result.toString());
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => HomeScreen()));
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => CategoriesScreen()));
           },
           child: Text('Save'),
           color: Colors.blue,

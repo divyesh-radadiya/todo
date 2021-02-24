@@ -1,7 +1,7 @@
 import 'package:app_todo/models/category.dart';
 
 import 'package:app_todo/service/category_service.dart';
-import 'package:app_todo/screen/home_screen.dart';
+import 'package:app_todo/screen/categories_screen.dart';
 import 'package:flutter/material.dart';
 
 class CategoriesForm extends StatefulWidget {
@@ -28,8 +28,8 @@ class _CategoriesFormState extends State<CategoriesForm> {
                 description: _descriptionController.text,
                 name: _nameController.text));
             print(result.toString());
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => HomeScreen()));
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => CategoriesScreen()));
           },
           child: Text('Save'),
           color: Colors.blue,
