@@ -41,7 +41,8 @@ class _MyDrawerState extends State<MyDrawer> {
         children: [
           UserAccountsDrawerHeader(
               currentAccountPicture: CircleAvatar(
-                backgroundColor: Colors.cyanAccent,
+                backgroundImage: NetworkImage(
+                    'https://www.cricbuzz.com/a/img/v1/152x152/i1/c170661/virat-kohli.jpg'),
               ),
               accountName: Text('Divyesh'),
               accountEmail: Text('divyesh@gmail.com')),
