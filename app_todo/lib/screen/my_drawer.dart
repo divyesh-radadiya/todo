@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:app_todo/screen/categories_screen.dart';
 import 'package:app_todo/service/category_service.dart';
 import 'package:app_todo/screen/home_screen.dart';
+import 'package:app_todo/screen/todo_by_category.dart';
 
 class MyDrawer extends StatefulWidget {
   @override
@@ -15,6 +16,10 @@ class _MyDrawerState extends State<MyDrawer> {
     for (var data in allData) {
       _allCategories.add(
         ListTile(
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => TodoByCategory(data['name'])));
+          },
           title: Text(data['name']),
           leading: Icon(Icons.arrow_forward_ios_outlined),
         ),

@@ -41,4 +41,10 @@ class Repository {
     var con = await database;
     return await con.rawDelete("DELETE from $table where id =$itemId");
   }
+
+  readDataByColumnName(table, columnName, columnValue) async {
+    var con = await database;
+    return await con
+        .query(table, where: '$columnName=?', whereArgs: [columnValue]);
+  }
 }
