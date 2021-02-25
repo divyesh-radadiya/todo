@@ -27,7 +27,7 @@ class _CategoriesFormState extends State<CategoriesForm> {
             var result = await CategoryService().saveCategory(Category(
                 description: _descriptionController.text,
                 name: _nameController.text));
-            print(result.toString());
+
             Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => CategoriesScreen()));
           },

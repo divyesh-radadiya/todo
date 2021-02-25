@@ -1,31 +1,27 @@
 import 'package:app_todo/models/category.dart';
 import 'package:app_todo/screen/categories_screen.dart';
 import 'package:app_todo/service/category_service.dart';
-
 import 'package:flutter/material.dart';
 
 class EditCategory extends StatefulWidget {
-  final id;
-
-  EditCategory({Key key, @required this.id}) : super(key: key);
-
+  const EditCategory({Key key, @required this.id}) : super(key: key);
+  final int id;
   @override
   _EditCategoryState createState() => _EditCategoryState(id);
 }
 
 class _EditCategoryState extends State<EditCategory> {
-  var id;
-  Category _category;
   _EditCategoryState(this.id);
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _descriptionController = TextEditingController();
-  setData() async {
-    print(id.toString());
-    var data = await CategoryService().readCategoryById(id);
+  int id;
+  Category _category;
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
+  void setData() async {
+    final dynamic data = await CategoryService().readCategoryById(id);
     _category = Category(
-        name: data[0]['name'],
-        description: data[0]['description'],
-        id: data[0]['id']);
+        name: data[0]['name'].toString(),
+        description: data[0]['description'].toString(),
+        id: int.parse(data[0]['id'].toString()));
 
     _nameController.text = _category.name;
     _descriptionController.text = _category.description;
